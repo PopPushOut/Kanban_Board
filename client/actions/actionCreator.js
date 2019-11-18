@@ -20,3 +20,10 @@ export function removeGridColumn(i) {
     i
   };
 }
+
+export function addGridColumn(i) {
+  return {
+    type: "ADD_GRID_COLUMN",
+    i
+  };
+}

@@ -6,7 +6,7 @@ import { browserHistory } from "react-router";
 import rootReducer from "./reducers/index";
 
 import comments from "./data/comments";
-import gridColumns from "./data/posts";
+import gridColumns from "./data/columns";
 
 const defaultState = {
   gridColumns,
@@ -16,4 +16,12 @@ const defaultState = {
 const store = createStore(rootReducer, defaultState);
 
 export const history = syncHistoryWithStore(browserHistory, store);
+
+/*if (module.hot) {
+  module.hot.accept("./reducers/", () => {
+    const nextRootReducer = require("./reducers/index").default;
+    store.replaceReducer(nextRootReducer);
+  });
+}*/
+
 export default store;

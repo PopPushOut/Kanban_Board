@@ -8,10 +8,15 @@ const KanbanGrid = React.createClass({
       <div className="photo-grid">
         {this.props.gridColumns.map((column, index) => {
           return (
-            <GridColumn key={column.id} index={index} column={column} removeGridColumn={this.props.removeGridColumn}></GridColumn>
+            <GridColumn
+              key={column.id}
+              index={index}
+              column={column}
+              removeGridColumn={this.props.removeGridColumn}
+            />
           );
         })}
-        <AddGridColumn/>
+        <AddGridColumn addGridColumn={this.props.addGridColumn} />
       </div>
     );
   }

@@ -1,9 +1,9 @@
 import React from "react";
 
-const itemInfo = React.createClass({
+const TaskInfo = React.createClass({
   render() {
     return <div>I'm item info</div>;
   }
 });
 
-export default itemInfo;
+export default TaskInfo;

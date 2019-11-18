@@ -6,18 +6,18 @@ import css from "./styles/style.styl";
 // Components Import
 import App from "./components/App";
 import KanbanGrid from "./components/KanbanGrid";
-import ItemInfo from "./components/ItemInfo";
+import TaskInfo from "./components/TaskInfo";
 
-import { Router, Route, IndexRoute, browserHistory } from "react-router";
+import { Router, Route, IndexRoute } from "react-router";
 import { Provider } from "react-redux";
 import store, { history } from "./store";
 
 const router = (
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={KanbanGrid}></IndexRoute>
-        <Route path="/item/:itemId" component={ItemInfo}></Route>
+        <Route path="/task/:taskId" component={TaskInfo}></Route>
       </Route>
     </Router>
   </Provider>
