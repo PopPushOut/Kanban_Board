@@ -1,29 +1,40 @@
-export function addComment(itemId, comment) {
+export function addTask(i, description, id) {
   return {
-    type: "ADD_COMMENT",
-    itemId,
-    comment
+    type: 'ADD_TASK',
+    i,
+    description,
+    id
   };
 }
 
-export function removeComment(itemId, i) {
+export function changeTasksParent(id, newIndex, oldIndex) {
   return {
-    type: "REMOVE_COMMENT",
-    itemId,
-    i
+    type: 'CHANGE_TASKS_PARENT',
+    id,
+    newIndex,
+    oldIndex
   };
 }
 
 export function removeGridColumn(i) {
   return {
-    type: "REMOVE_GRID_COLUMN",
+    type: 'REMOVE_GRID_COLUMN',
     i
   };
 }
 
-export function addGridColumn(i) {
+export function addGridColumn(id, title) {
   return {
-    type: "ADD_GRID_COLUMN",
-    i
+    type: 'ADD_GRID_COLUMN',
+    id,
+    title
+  };
+}
+
+export function updateGridColumnTitle(i, title) {
+  return {
+    type: 'UPDATE_GRID_COLUMN_TITLE',
+    i,
+    title
   };
 }

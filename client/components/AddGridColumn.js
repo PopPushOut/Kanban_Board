@@ -1,33 +1,31 @@
-import React from "react";
+import React from 'react';
+import generateId from '../helpers/generator';
 
 const AddGridColumn = React.createClass({
-  componentWillMount() {
-    this.title = null;
-  },
+  title: null,
   setTitleInput(element) {
     this.title = element;
   },
-  addGridColumn(event) {
-    const [min, max] = [1000000000000000000, 9999999999999999999];
-    const id = Math.floor(Math.random() * (max - min + 1)) + min;
-
-    event.preventDefault();
-    console.log("Create new column");
+  addGridColumn() {
+    const id = generateId();
+    this.props.addGridColumn(id, this.title.value);
   },
   render() {
     return (
-      <figure className="grid-figure">
-        <form onSubmit={this.addGridColumn}>
+      <figure className='grid-figure'>
+        <div className='form'>
           <input
-            type="text"
+            type='text'
             required
             ref={this.setTitleInput}
-            name="title"
-            id="title"
-            placeholder="Title"
+            name='title'
+            id='title'
+            placeholder='Title'
           />
-          <button>+ Add Column</button>
-        </form>
+          <button style={{ marginTop: 5 + 'px' }} onClick={this.addGridColumn}>
+            + Add Column
+          </button>
+        </div>
       </figure>
     );
   }

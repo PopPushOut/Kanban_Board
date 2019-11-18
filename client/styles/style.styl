@@ -42,6 +42,23 @@ body
     width 100%
     margin 0
 
+.task-list
+  margin 0
+  padding 0
+  .task
+    border 2px solid lighten(grey, 90%)
+    width 100%
+    display inline-block
+    text-decoration none
+    padding 2px
+    font-size 12px
+    color black
+    transition all 0.2s
+    box-sizing padding-box
+    &:hover, &:focus
+      border-color blue
+      outline 0
+
 .remove-column
   position absolute
   top 0
@@ -76,7 +93,7 @@ body
     .remove-comment
       opacity 1
  
-.comment-form 
+.form 
   input, textarea
     width 100%
     border 0
@@ -127,6 +144,19 @@ button, .button
     border-color blue
     outline 0
 
+.save-button
+    @extend .button
+    text-size 10px
+    line-height 1
+    padding 3px
+    margin 2px 0
+  .edit-button
+    @extend .button
+    text-size 10px
+    line-height 1
+    padding 3px
+    margin-left 2px
+  
 /*
   Cowboy style speech bubble - you should probably use an SVG for this if you are doing more icons.
 */

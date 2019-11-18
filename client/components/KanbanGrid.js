@@ -1,18 +1,23 @@
-import React from "react";
-import GridColumn from "./GridColumn";
-import AddGridColumn from "./AddGridColumn";
+import React from 'react';
+
+import GridColumn from './GridColumn';
+import AddGridColumn from './AddGridColumn';
 
 const KanbanGrid = React.createClass({
   render() {
     return (
-      <div className="photo-grid">
+      <div className='photo-grid'>
         {this.props.gridColumns.map((column, index) => {
           return (
             <GridColumn
-              key={column.id}
+              key={index}
               index={index}
               column={column}
+              tasks={this.props.tasks || []}
+              changeTasksParent={this.props.changeTasksParent}
               removeGridColumn={this.props.removeGridColumn}
+              updateGridColumnTitle={this.props.updateGridColumnTitle}
+              addTask={this.props.addTask}
             />
           );
         })}

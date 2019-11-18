@@ -1,12 +1,12 @@
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import * as actionCreators from "../actions/actionCreator";
-import Main from "./Main";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from '../actions/actionCreator';
+import Main from './Main';
 
 function mapStateToProps(state) {
   return {
     gridColumns: state.gridColumns,
-    comments: state.comments
+    tasks: state.tasks
   };
 }
 

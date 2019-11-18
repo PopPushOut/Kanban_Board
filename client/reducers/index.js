@@ -1,12 +1,12 @@
-import { combineReducers } from "redux";
-import { routerReducer } from "react-router-redux";
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
-import gridColumns from "./gridColumns";
-import comments from "./comments";
+import gridColumns from './gridColumns';
+import tasks from './tasks';
 
 const rootReducer = combineReducers({
   gridColumns,
-  comments,
+  tasks,
   routing: routerReducer
 });
 
