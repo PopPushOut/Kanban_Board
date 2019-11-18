@@ -1,6 +1,6 @@
 # React + Redux
 
-A simple kanban-Board React + Redux implementation.npm audit 
+A simple kanban-Board React + Redux implementation.
 
 ## Running
 
