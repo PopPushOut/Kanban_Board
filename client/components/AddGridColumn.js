@@ -1,5 +1,5 @@
-import React from 'react';
-import generateId from '../helpers/generator';
+import React from "react";
+import { v4 } from "node-uuid";
 
 const AddGridColumn = React.createClass({
   title: null,
@@ -7,22 +7,22 @@ const AddGridColumn = React.createClass({
     this.title = element;
   },
   addGridColumn() {
-    const id = generateId();
+    const id = v4();
     this.props.addGridColumn(id, this.title.value);
   },
   render() {
     return (
-      <figure className='grid-figure'>
-        <div className='form'>
+      <figure className="grid-figure">
+        <div className="form">
           <input
-            type='text'
+            type="text"
             required
             ref={this.setTitleInput}
-            name='title'
-            id='title'
-            placeholder='Title'
+            name="title"
+            id="title"
+            placeholder="Title"
           />
-          <button style={{ marginTop: 5 + 'px' }} onClick={this.addGridColumn}>
+          <button className="save-button" onClick={this.addGridColumn}>
             + Add Column
           </button>
         </div>

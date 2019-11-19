@@ -6,19 +6,16 @@ body
   background offwhite
 
 .photo-grid
-  display flex
-  flex-wrap wrap
-  max-width 1200px
+  height 100vh;
+  display grid
+  grid-template-columns repeat(auto-fill, minmax(400px, 1fr))
   margin 0 auto
 
 .grid-figure
-  flex-basis calc(33.333% - 4rem)
-  flex-grow 1
-  flex-shrink 0
   margin 0 2rem 2rem 2rem
   padding 2rem
   border 1px solid lightgray
-  background white
+  background offwhite
   box-shadow 0 0 0 5px rgba(0,0,0,0.03);
   position relative
 
@@ -47,6 +44,8 @@ body
   padding 0
   .task
     border 2px solid lighten(grey, 90%)
+    border-radius 3px
+    margin 2px 0
     width 100%
     display inline-block
     text-decoration none
@@ -54,22 +53,20 @@ body
     font-size 12px
     color black
     transition all 0.2s
-    box-sizing padding-box
     &:hover, &:focus
       border-color blue
       outline 0
 
 .remove-column
+  border none
   position absolute
   top 0
   right 0
   line-height 1
-
-.grid-photo
-  width calc(100% + 4rem)
-  margin-left -2rem
-  margin-top -2rem
-  max-width none
+  color blue
+  &:hover, &:focus
+    color red
+    outline 0
 
 // Comments
 .remove-comment
@@ -102,6 +99,8 @@ body
     border-bottom 1px solid lightgrey
     outline none
     resize vertical
+  .error
+    border 1px red solid
 
 
 .grid-photo-wrap

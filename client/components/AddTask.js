@@ -1,5 +1,5 @@
-import React from 'react';
-import generateId from '../helpers/generator';
+import React from "react";
+import { v4 } from "node-uuid";
 
 const AddTask = React.createClass({
   taskDescription: null,
@@ -10,21 +10,21 @@ const AddTask = React.createClass({
     const [columnIndex, description, taskId] = [
       this.props.index,
       this.taskDescription.value,
-      generateId()
+      v4()
     ];
     this.props.addTask(columnIndex, description, taskId);
   },
   render() {
     return (
-      <li className='task form'>
+      <li className="form">
         <input
-          type='text'
+          type="text"
           ref={this.setDescriptionInput}
-          name='description'
-          id='description'
-          placeholder='Description'
+          name="description"
+          id="description"
+          placeholder="Description"
         />
-        <button onClick={this.addTask} className='save-button'>
+        <button onClick={this.addTask} className="save-button">
           + Add Task
         </button>
       </li>
