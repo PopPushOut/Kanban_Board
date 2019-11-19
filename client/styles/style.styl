@@ -6,7 +6,7 @@ body
   background offwhite
 
 .photo-grid
-  height 100vh;
+  //height 100vh;
   display grid
   grid-template-columns repeat(auto-fill, minmax(400px, 1fr))
   margin 0 auto
@@ -43,6 +43,7 @@ body
   margin 0
   padding 0
   .task
+    cursor grab
     border 2px solid lighten(grey, 90%)
     border-radius 3px
     margin 2px 0
@@ -57,12 +58,16 @@ body
       border-color blue
       outline 0
 
+.selectable
+  cursor pointer
+
 .remove-column
   border none
   position absolute
   top 0
   right 0
   line-height 1
+  font-size 30px
   color blue
   &:hover, &:focus
     color red
@@ -100,7 +105,8 @@ body
     outline none
     resize vertical
   .error
-    border 1px red solid
+    border 2px blue solid
+    border-radius: 3px;
 
 
 .grid-photo-wrap

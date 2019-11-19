@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { formatDate } from '../utils/utility';
 
 const Task = React.createClass({
   render() {
-    const { id, description } = this.props.task;
+    const { id, title, createdOn } = this.props.task;
     return (
       <Link to={`/task/${id}`}>
         <li
@@ -11,7 +12,8 @@ const Task = React.createClass({
           onDragStart={this.props.onDragStart}
           draggable
           className='task'>
-          <h4>{description}</h4>
+          <h4>{title}</h4>
+          {formatDate(createdOn)}
         </li>
       </Link>
     );

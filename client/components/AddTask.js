@@ -1,33 +1,81 @@
-import React from "react";
-import { v4 } from "node-uuid";
+import React from 'react';
+import { v4 } from 'node-uuid';
+
+function isEmpty(title) {
+  return title.length === 0;
+}
 
 const AddTask = React.createClass({
-  taskDescription: null,
-  setDescriptionInput(element) {
-    this.taskDescription = element;
+  componentWillMount() {
+    this.state = {
+      taskTitle: '',
+      editMode: false,
+      taskCanBeSubmitted: false
+    };
+  },
+  changeHandler(event) {
+    const title = event.target.value;
+    this.setState({
+      taskTitle: title,
+      taskCanBeSubmitted: !isEmpty(title)
+    });
   },
   addTask() {
-    const [columnIndex, description, taskId] = [
+    const [columnIndex, title, taskId] = [
       this.props.index,
-      this.taskDescription.value,
+      this.state.taskTitle,
       v4()
     ];
-    this.props.addTask(columnIndex, description, taskId);
+    if (isEmpty(title)) {
+      this.inputEl.focus();
+      this.taskCanBeSubmitted = false;
+      return;
+    }
+    this.props.addTask(columnIndex, title, taskId);
+    this.setInitialState();
+  },
+  setInitialState() {
+    this.setState({
+      taskTitle: '',
+      editMode: false,
+      taskCanBeSubmitted: false
+    });
+  },
+  setEditMode() {
+    this.setState({
+      editMode: !this.state.editMode
+    });
+  },
+  setTitleInput(element) {
+    this.inputEl = element;
   },
   render() {
     return (
-      <li className="form">
-        <input
-          type="text"
-          ref={this.setDescriptionInput}
-          name="description"
-          id="description"
-          placeholder="Description"
-        />
-        <button onClick={this.addTask} className="save-button">
-          + Add Task
-        </button>
-      </li>
+      <div style={{ marginTop: 3 + 'px' }}>
+        {!this.state.editMode ? (
+          <button onClick={this.setEditMode} className='save-button'>
+            + Add Task
+          </button>
+        ) : (
+          <div className='form'>
+            <input
+              className={!this.state.taskCanBeSubmitted ? 'error' : ''}
+              type='text'
+              ref={this.setTitleInput}
+              onChange={this.changeHandler}
+              name='title'
+              id='title'
+              placeholder='Task Title'
+            />
+            <button onClick={this.addTask} className='save-button'>
+              Save
+            </button>
+            <button onClick={this.setInitialState} className='save-button'>
+              Cancel
+            </button>
+          </div>
+        )}
+      </div>
     );
   }
 });

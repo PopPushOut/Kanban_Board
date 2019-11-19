@@ -1,9 +1,10 @@
-export function addTask(i, description, id) {
+export function addTask(i, title, parentTitle, id) {
   return {
     type: 'ADD_TASK',
     i,
-    description,
-    id
+    title,
+    id,
+    parentTitle
   };
 }
 

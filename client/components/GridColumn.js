@@ -1,35 +1,14 @@
-import React from "react";
+import React from 'react';
 
-import TaskList from "./TaskList";
+import TaskList from './TaskList';
 
 function validate(title) {
   return title.length !== 0;
 }
 
 const GridColumn = React.createClass({
-  onDragStart(e) {
-    const dragInfo = {
-      taskId: e.currentTarget.id,
-      parentColumnId: this.props.column.id,
-      parentColumnIndex: this.props.index
-    };
-    localStorage.setItem("dragInfo", JSON.stringify(dragInfo));
-  },
-  onDragOver(e) {
-    e.preventDefault();
-  },
-  onDrop() {
-    const droppedTask = localStorage.getItem("dragInfo");
-    const parsedDragInfo = JSON.parse(droppedTask);
-    const [taskId, newColumnIndex, oldColumnIndex] = [
-      parsedDragInfo.taskId,
-      this.props.index,
-      parsedDragInfo.parentColumnIndex
-    ];
-    this.props.changeTasksParent(taskId, newColumnIndex, oldColumnIndex);
-  },
   componentWillUnmount() {
-    document.removeEventListener("click", this.handleOutsideClick, false);
+    document.removeEventListener('click', this.handleOutsideClick, false);
   },
   componentWillMount() {
     this.state = {
@@ -37,6 +16,27 @@ const GridColumn = React.createClass({
       title: this.props.column.title,
       titleCanBeSubmitted: validate(this.props.column.title)
     };
+  },
+  onDragStart(e) {
+    const dragInfo = {
+      taskId: e.currentTarget.id,
+      parentColumnId: this.props.column.id,
+      parentColumnIndex: this.props.index
+    };
+    localStorage.setItem('dragInfo', JSON.stringify(dragInfo));
+  },
+  onDragOver(e) {
+    e.preventDefault();
+  },
+  onDrop() {
+    const droppedTask = localStorage.getItem('dragInfo');
+    const parsedDragInfo = JSON.parse(droppedTask);
+    const [taskId, newColumnIndex, oldColumnIndex] = [
+      parsedDragInfo.taskId,
+      this.props.index,
+      parsedDragInfo.parentColumnIndex
+    ];
+    this.props.changeTasksParent(taskId, newColumnIndex, oldColumnIndex);
   },
   switchEditMode() {
     this.setState({ editMode: !this.state.editMode });
@@ -46,10 +46,10 @@ const GridColumn = React.createClass({
       return;
     }
     if (!this.state.editMode) {
-      document.addEventListener("click", this.handleOutsideClick, false);
+      document.addEventListener('click', this.handleOutsideClick, false);
     } else {
       this.saveTitle();
-      document.removeEventListener("click", this.handleOutsideClick, false);
+      document.removeEventListener('click', this.handleOutsideClick, false);
     }
     this.switchEditMode();
   },
@@ -64,10 +64,10 @@ const GridColumn = React.createClass({
     this.props.updateGridColumnTitle(this.props.index, this.state.title);
   },
   changeHandler(event) {
-    const validTitle = validate(event.target.value);
+    const titleValue = event.target.value;
     this.setState({
-      title: event.target.value,
-      titleCanBeSubmitted: validTitle
+      title: titleValue,
+      titleCanBeSubmitted: validate(titleValue)
     });
   },
   setTitleFieldNode(node) {
@@ -76,29 +76,31 @@ const GridColumn = React.createClass({
   render() {
     return (
       <figure
-        className="grid-figure"
+        className='grid-figure'
         onDragOver={this.onDragOver}
-        onDrop={this.onDrop}
-      >
+        onDrop={this.onDrop}>
         {this.state.editMode ? (
-          <span className="form">
+          <span className='form'>
             <input
-              className={!this.state.titleCanBeSubmitted ? "error" : ""}
+              className={!this.state.titleCanBeSubmitted ? 'error' : ''}
               ref={this.setTitleFieldNode}
-              type="text"
+              type='text'
+              placeholder='Title'
               onChange={this.changeHandler}
               defaultValue={this.state.title}
             />
           </span>
         ) : (
-          <div onClick={this.handleClick} ref={this.setTitleFieldNode}>
+          <div
+            className='selectable'
+            onClick={this.handleClick}
+            ref={this.setTitleFieldNode}>
             <h2>{this.props.column.title}</h2>
           </div>
         )}
         <button
-          className="remove-column"
-          onClick={this.props.removeGridColumn.bind(null, this.props.index)}
-        >
+          className='remove-column'
+          onClick={this.props.removeGridColumn.bind(null, this.props.index)}>
           &times;
         </button>
 
@@ -107,8 +109,7 @@ const GridColumn = React.createClass({
           column={this.props.column}
           tasks={this.props.tasks}
           index={this.props.index}
-          addTask={this.props.addTask}
-        ></TaskList>
+          addTask={this.props.addTask}></TaskList>
       </figure>
     );
   }

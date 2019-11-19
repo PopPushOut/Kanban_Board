@@ -1,8 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const TaskInfo = React.createClass({
   render() {
-    return <div>I'm item info</div>;
+    // find id of parent
+    const i = this.props.tasks[this.props.params.taskId];
+    console.log(i);
+    return <div className='single-photo'>I'm item info</div>;
   }
 });
 
