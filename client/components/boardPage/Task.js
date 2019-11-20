@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { formatDate } from '../utils/utility';
+import React from "react";
+import { Link } from "react-router";
+import { formatDate } from "../../utils/utility";
 
 const Task = React.createClass({
   render() {
@@ -11,7 +11,8 @@ const Task = React.createClass({
           id={id}
           onDragStart={this.props.onDragStart}
           draggable
-          className='task'>
+          className="task"
+        >
           <h4>{title}</h4>
           {formatDate(createdOn)}
         </li>

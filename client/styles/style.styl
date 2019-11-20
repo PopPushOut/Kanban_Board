@@ -6,7 +6,6 @@ body
   background offwhite
 
 .photo-grid
-  //height 100vh;
   display grid
   grid-template-columns repeat(auto-fill, minmax(400px, 1fr))
   margin 0 auto
@@ -19,7 +18,7 @@ body
   box-shadow 0 0 0 5px rgba(0,0,0,0.03);
   position relative
 
-.single-photo
+.single-task
   @extend .grid-figure
   max-width 900px
   margin 0 auto
@@ -35,9 +34,6 @@ body
   .comments
     flex 1 0 40%
     max-width 40%
-  .grid-photo
-    width 100%
-    margin 0
 
 .task-list
   margin 0
@@ -107,22 +103,6 @@ body
   .error
     border 2px blue solid
     border-radius: 3px;
-
-
-.grid-photo-wrap
-  position relative
-  
-.likes-heart
-  background url(http://f.cl.ly/items/3Y373q2Q3J3Y1j203n0m/Bitmap-3.png) center no-repeat
-  background-size contain
-  font-size 2rem
-  padding 1rem
-  position absolute
-  color blue
-  left 50%
-  top 50%
-  pointer-events none
-  
 
 /*  
   Buttons  

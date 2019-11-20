@@ -1,16 +1,16 @@
 function gridColumns(state = [], action) {
-  if (action.type === 'REMOVE_GRID_COLUMN') {
+  if (action.type === "REMOVE_GRID_COLUMN") {
     const i = action.i;
     return [...state.slice(0, i), ...state.slice(i + 1)];
   }
-  if (action.type === 'ADD_GRID_COLUMN') {
+  if (action.type === "ADD_GRID_COLUMN") {
     const newColumn = {
       id: action.id,
       title: action.title
     };
     return [...state, newColumn];
   }
-  if (action.type === 'UPDATE_GRID_COLUMN_TITLE') {
+  if (action.type === "UPDATE_GRID_COLUMN_TITLE") {
     const i = action.i;
     return [
       ...state.slice(0, i),
@@ -21,7 +21,7 @@ function gridColumns(state = [], action) {
       ...state.slice(i + 1)
     ];
   }
-  if (action.type === 'ADD_TASK') {
+  if (action.type === "ADD_TASK") {
     const { i, id } = action;
     return [
       ...state.slice(0, i),
@@ -32,7 +32,7 @@ function gridColumns(state = [], action) {
       ...state.slice(i + 1)
     ];
   }
-  if (action.type === 'CHANGE_TASKS_PARENT') {
+  if (action.type === "CHANGE_TASKS_PARENT") {
     const { id, newIndex, oldIndex } = action;
 
     // Task dropped on same column, do nothing
@@ -46,7 +46,7 @@ function gridColumns(state = [], action) {
       id
     ];
     copyOfState[oldIndex].taskIds = copyOfState[oldIndex].taskIds.filter(
-      (taskId) => {
+      taskId => {
         return taskId !== id;
       }
     );

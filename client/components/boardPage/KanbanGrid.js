@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import GridColumn from './GridColumn';
-import AddGridColumn from './AddGridColumn';
+import GridColumn from "./GridColumn";
+import AddGridColumn from "./AddGridColumn";
 
 const KanbanGrid = React.createClass({
   render() {
     return (
-      <div className='photo-grid'>
+      <div className="photo-grid">
         {this.props.gridColumns.map((column, index) => {
           return (
             <GridColumn
