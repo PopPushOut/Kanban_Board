@@ -1,22 +1,20 @@
-import React from "react";
-import { Link } from "react-router";
-import { formatDate } from "../../utils/utility";
+import React from 'react';
+
+import CommentCounter from '../CommentCounter';
 
 const Task = React.createClass({
   render() {
-    const { id, title, createdOn } = this.props.task;
+    const { id, title } = this.props.task;
+    const taskComments = this.props.comments[id] || [];
     return (
-      <Link to={`/task/${id}`}>
-        <li
-          id={id}
-          onDragStart={this.props.onDragStart}
-          draggable
-          className="task"
-        >
-          <h4>{title}</h4>
-          {formatDate(createdOn)}
-        </li>
-      </Link>
+      <li
+        id={id}
+        onDragStart={this.props.onDragStart}
+        draggable
+        className='task'>
+        <h4>{title}</h4>
+        <CommentCounter comments={taskComments} taskId={id} />
+      </li>
     );
   }
 });

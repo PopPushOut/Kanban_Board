@@ -1,20 +1,19 @@
-import React from "react";
+import React from 'react';
 
 const Comments = React.createClass({
   renderComment(comment, i) {
     return (
-      <div className="comment" key={i}>
+      <div className='comment' key={i}>
         <p>
           <strong>{comment.user}</strong>
           {comment.text}
           <button
-            className="remove-comment"
+            className='remove-comment'
             onClick={this.props.removeComment.bind(
               null,
-              this.props.params.postId,
+              this.props.params.taskId,
               i
-            )}
-          >
+            )}>
             &times;
           </button>
         </p>
@@ -23,20 +22,20 @@ const Comments = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault();
-    const { postId } = this.props.params;
+    const { taskId } = this.props.params;
     const author = this.refs.author.value;
     const comment = this.refs.comment.value;
-    this.props.addComment(postId, author, comment);
+    this.props.addComment(taskId, author, comment);
     this.refs.commentForm.reset();
   },
   render() {
     return (
-      <div className="comments">
-        {this.props.postComments.map(this.renderComment)}
-        <form ref="commentForm" className="form" onSubmit={this.handleSubmit}>
-          <input type="text" ref="author" placeholder="author" />
-          <input type="text" ref="comment" placeholder="comment" />
-          <input type="submit" hidden />
+      <div className='comments'>
+        {this.props.taskComments.map(this.renderComment)}
+        <form ref='commentForm' className='form' onSubmit={this.handleSubmit}>
+          <input type='text' ref='author' placeholder='author' />
+          <input type='text' ref='comment' placeholder='comment' />
+          <input type='submit' hidden />
         </form>
       </div>
     );

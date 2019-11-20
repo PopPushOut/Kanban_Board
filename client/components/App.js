@@ -6,7 +6,8 @@ import Main from './Main';
 function mapStateToProps(state) {
   return {
     gridColumns: state.gridColumns,
-    tasks: state.tasks
+    tasks: state.tasks,
+    comments: state.comments
   };
 }
 

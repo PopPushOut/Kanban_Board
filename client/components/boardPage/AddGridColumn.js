@@ -50,9 +50,9 @@ const AddGridColumn = React.createClass({
     return (
       <figure className='grid-figure'>
         {!this.state.editMode ? (
-          <button className='save-button' onClick={this.setEditMode}>
-            + Add Column
-          </button>
+          <div className='control-buttons'>
+            <button onClick={this.setEditMode}>+ Add Column</button>
+          </div>
         ) : (
           <div className='form'>
             <input
@@ -62,14 +62,12 @@ const AddGridColumn = React.createClass({
               onChange={this.changeHandler}
               name='title'
               id='title'
-              placeholder='Title'
+              placeholder='New Column Title'
             />
-            <button onClick={this.addGridColumn} className='save-button'>
-              Save
-            </button>
-            <button onClick={this.setInitialState} className='save-button'>
-              Cancel
-            </button>
+            <div className='control-buttons'>
+              <button onClick={this.addGridColumn}>Save</button>
+              <button onClick={this.setInitialState}>Cancel</button>
+            </div>
           </div>
         )}
       </figure>

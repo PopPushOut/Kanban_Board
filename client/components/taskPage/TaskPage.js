@@ -1,25 +1,43 @@
-import React from "react";
-import Comments from "./Comments.js";
-import TaskInfo from "./TaskInfo.js";
+import React from 'react';
+import Comments from './Comments.js';
+import TaskInfo from './TaskInfo.js';
 
 const TaskPage = React.createClass({
+  removeTask(taskId, columnIndex) {
+    var result = confirm('Are you sure you want to delete task?');
+    if (result) {
+      this.props.removeTask(taskId, columnIndex);
+      this.props.history.push('/');
+    }
+  },
   render() {
     const taskId = this.props.params.taskId;
-    // get task information
     const task = this.props.tasks[taskId];
     const columns = this.props.gridColumns;
-    const parentColumn = columns.find(column =>
+    const parentColumnIndex = columns.findIndex((column) =>
       column.taskIds.includes(taskId)
     );
-    if (task && columns && parentColumn) {
+    const taskComments = this.props.comments[taskId] || [];
+    if (task && columns && parentColumnIndex != -1) {
+      const parentTitle = columns[parentColumnIndex].title;
       return (
-        <div className="single-task">
-          <TaskInfo />
-          <Comments />
+        <div className='single-task'>
+          <button
+            className='remove'
+            onClick={this.removeTask.bind(null, taskId, parentColumnIndex)}>
+            &times;
+          </button>
+          <TaskInfo
+            parentTitle={parentTitle}
+            task={task}
+            taskComments={taskComments}
+            {...this.props}
+          />
+          <Comments taskComments={taskComments} {...this.props} />
         </div>
       );
     } else {
-      return <div>Task with wrong id passed!</div>;
+      return <div>Ooooops, something went wrong!</div>;
     }
   }
 });

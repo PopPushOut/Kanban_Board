@@ -70,6 +70,12 @@ const GridColumn = React.createClass({
       titleCanBeSubmitted: validate(titleValue)
     });
   },
+  removeColumn() {
+    var result = confirm('Are you sure you want to delete column?');
+    if (result) {
+      this.props.removeGridColumn(this.props.index);
+    }
+  },
   setTitleFieldNode(node) {
     this.node = node;
   },
@@ -98,18 +104,18 @@ const GridColumn = React.createClass({
             <h2>{this.props.column.title}</h2>
           </div>
         )}
-        <button
-          className='remove-column'
-          onClick={this.props.removeGridColumn.bind(null, this.props.index)}>
+        <button className='remove' onClick={this.removeColumn}>
           &times;
         </button>
 
         <TaskList
           onDragStart={this.onDragStart}
+          comments={this.props.comments}
           column={this.props.column}
           tasks={this.props.tasks}
           index={this.props.index}
-          addTask={this.props.addTask}></TaskList>
+          addTask={this.props.addTask}
+        />
       </figure>
     );
   }

@@ -51,11 +51,11 @@ const AddTask = React.createClass({
   },
   render() {
     return (
-      <div style={{ marginTop: 3 + 'px' }}>
+      <div>
         {!this.state.editMode ? (
-          <button onClick={this.setEditMode} className='save-button'>
-            + Add Task
-          </button>
+          <div className='control-buttons'>
+            <button onClick={this.setEditMode}>+ Add Task</button>
+          </div>
         ) : (
           <div className='form'>
             <input
@@ -67,12 +67,10 @@ const AddTask = React.createClass({
               id='title'
               placeholder='Task Title'
             />
-            <button onClick={this.addTask} className='save-button'>
-              Save
-            </button>
-            <button onClick={this.setInitialState} className='save-button'>
-              Cancel
-            </button>
+            <div className='control-buttons'>
+              <button onClick={this.addTask}>Save</button>
+              <button onClick={this.setInitialState}>Cancel</button>
+            </div>
           </div>
         )}
       </div>

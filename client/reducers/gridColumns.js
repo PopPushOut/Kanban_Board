@@ -1,16 +1,16 @@
 function gridColumns(state = [], action) {
-  if (action.type === "REMOVE_GRID_COLUMN") {
+  if (action.type === 'REMOVE_GRID_COLUMN') {
     const i = action.i;
     return [...state.slice(0, i), ...state.slice(i + 1)];
   }
-  if (action.type === "ADD_GRID_COLUMN") {
+  if (action.type === 'ADD_GRID_COLUMN') {
     const newColumn = {
       id: action.id,
       title: action.title
     };
     return [...state, newColumn];
   }
-  if (action.type === "UPDATE_GRID_COLUMN_TITLE") {
+  if (action.type === 'UPDATE_GRID_COLUMN_TITLE') {
     const i = action.i;
     return [
       ...state.slice(0, i),
@@ -21,7 +21,7 @@ function gridColumns(state = [], action) {
       ...state.slice(i + 1)
     ];
   }
-  if (action.type === "ADD_TASK") {
+  if (action.type === 'ADD_TASK') {
     const { i, id } = action;
     return [
       ...state.slice(0, i),
@@ -32,7 +32,22 @@ function gridColumns(state = [], action) {
       ...state.slice(i + 1)
     ];
   }
-  if (action.type === "CHANGE_TASKS_PARENT") {
+  if (action.type === 'REMOVE_TASK') {
+    const { taskId, columnIndex } = action;
+    return [
+      ...state.slice(0, columnIndex),
+      {
+        ...state[columnIndex],
+        taskIds: [
+          ...state[columnIndex].taskIds.filter((id) => {
+            return taskId !== id;
+          })
+        ]
+      },
+      ...state.slice(columnIndex + 1)
+    ];
+  }
+  if (action.type === 'CHANGE_TASKS_PARENT') {
     const { id, newIndex, oldIndex } = action;
 
     // Task dropped on same column, do nothing
@@ -40,17 +55,28 @@ function gridColumns(state = [], action) {
       return [...state];
     }
 
-    const copyOfState = [...state];
-    copyOfState[newIndex].taskIds = [
-      ...(copyOfState[newIndex].taskIds || []),
-      id
+    // Remove task id from old column task id list
+    const copyOfState = [
+      ...state.slice(0, oldIndex),
+      {
+        ...state[oldIndex],
+        taskIds: [
+          ...state[oldIndex].taskIds.filter((taskId) => {
+            return taskId !== id;
+          })
+        ]
+      },
+      ...state.slice(oldIndex + 1)
     ];
-    copyOfState[oldIndex].taskIds = copyOfState[oldIndex].taskIds.filter(
-      taskId => {
-        return taskId !== id;
-      }
-    );
-    return copyOfState;
+    // Add task id to new column task id list
+    return [
+      ...copyOfState.slice(0, newIndex),
+      {
+        ...copyOfState[newIndex],
+        taskIds: [...(copyOfState[newIndex].taskIds || []), id]
+      },
+      ...copyOfState.slice(newIndex + 1)
+    ];
   }
   return state;
 }

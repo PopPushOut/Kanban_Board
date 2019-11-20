@@ -1,11 +1,10 @@
 @import '_normalize.styl'
 @import '_typography.styl'
-@import '_animations.styl'
 
 body
   background offwhite
 
-.photo-grid
+.grid
   display grid
   grid-template-columns repeat(auto-fill, minmax(400px, 1fr))
   margin 0 auto
@@ -18,6 +17,21 @@ body
   box-shadow 0 0 0 5px rgba(0,0,0,0.03);
   position relative
 
+.remove
+  border none
+  position absolute
+  top 0
+  right 0
+  line-height 1
+  font-size 30px
+  color blue
+  &:hover, &:focus
+    color red
+    outline 0
+
+/*
+  Task Related CSS
+*/
 .single-task
   @extend .grid-figure
   max-width 900px
@@ -57,19 +71,38 @@ body
 .selectable
   cursor pointer
 
-.remove-column
-  border none
-  position absolute
-  top 0
-  right 0
-  line-height 1
-  font-size 30px
-  color blue
-  &:hover, &:focus
-    color red
-    outline 0
+.decoration-none
+  text-decoration: none;
+  &:focus, &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
 
-// Comments
+.title
+  font-size 1.6rem
+  display flex
+  justify-content center
+
+.task-info
+  padding 1rem
+  .editable 
+    font-size 1.5rem
+    margin 1rem 0
+  h2
+    padding 1rem
+    border-bottom 2px solid blue
+  p
+    font-size 1rem
+    margin 0
+  strong
+    padding-left 1rem
+    color blue
+    margin-right 5px
+    &::after
+      content ':'
+
+/*  
+  Comments  
+*/
 .remove-comment
   background none
   border 0
@@ -90,7 +123,10 @@ body
   &:hover
     .remove-comment
       opacity 1
- 
+
+/*  
+  Input Form  
+*/
 .form 
   input, textarea
     width 100%
@@ -104,22 +140,31 @@ body
     border 2px blue solid
     border-radius: 3px;
 
+.textarea-readonly
+  background-color inherit
+  margin 1rem 0
+  min-height 100px
+
+.textarea
+  margin 1rem 0
+  min-height 100px
+
 /*  
   Buttons  
 */
-
 .control-buttons
   display flex
-  justify-content space-between
+  justify-content space-evenly
+  margin 1rem 0
     
 button, .button
   border 2px solid lighten(grey, 90%)
   background none
   flex-basis 48%
   display inline-block
-  line-height 2
+  line-height 1
   text-decoration none
-  padding 5px
+  padding 3px
   text-align center
   font-size 15px
   color blue
@@ -129,19 +174,6 @@ button, .button
     border-color blue
     outline 0
 
-.save-button
-    @extend .button
-    text-size 10px
-    line-height 1
-    padding 3px
-    margin 2px 0
-  .edit-button
-    @extend .button
-    text-size 10px
-    line-height 1
-    padding 3px
-    margin-left 2px
-  
 /*
   Cowboy style speech bubble - you should probably use an SVG for this if you are doing more icons.
 */
@@ -164,7 +196,3 @@ button, .button
     border-color: transparent blue transparent transparent
     top 30%
     left 0
-
-  
-  
-
