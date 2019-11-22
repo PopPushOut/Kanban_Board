@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import { formatDate } from '../../utils/utility';
-import CommentCounter from '../CommentCounter';
+import { formatDate } from "../../utils/utility";
+import CommentCounter from "../CommentCounter";
 
 const TaskInfo = React.createClass({
   componentWillMount() {
@@ -28,9 +28,9 @@ const TaskInfo = React.createClass({
     const task = this.props.task;
     const comments = this.props.taskComments;
     return (
-      <figure className='grid-figure'>
-        <h2 className='title'>{this.props.parentTitle}</h2>
-        <div className='task-info'>
+      <figure className="grid-figure">
+        <h2 className="title">{this.props.parentTitle}</h2>
+        <div className="task-info">
           <h2>{task.title}</h2>
           <p>
             <strong>Created</strong>
@@ -40,26 +40,27 @@ const TaskInfo = React.createClass({
             <strong>Updated</strong>
             {formatDate(task.updatedOn)}
           </p>
-          <div className='form'>
+          <div className="form">
             {!this.state.editMode ? (
               <textarea
-                className='textarea-readonly'
+                className="textarea-readonly"
                 value={task.description}
                 onClick={this.switchEditMode}
-                placeholder='Description'
+                placeholder="Description"
                 readOnly
               />
             ) : (
               <div>
                 <textarea
-                  className='textarea'
+                  className="textarea"
                   value={this.state.description}
                   onChange={this.handleChange}
-                  placeholder='Description'
+                  placeholder="Description"
                 />
-                <div className='control-buttons'>
+                <div className="control-buttons">
                   <button
-                    onClick={this.updateTaskDescription.bind(null, task.id)}>
+                    onClick={this.updateTaskDescription.bind(null, task.id)}
+                  >
                     Save
                   </button>
                   <button onClick={this.switchEditMode}>Cancel</button>

@@ -1,15 +1,15 @@
-import { createStore, compose } from 'redux';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { browserHistory } from 'react-router';
-import throttle from 'lodash/throttle';
+import { createStore, compose } from "redux";
+import { syncHistoryWithStore } from "react-router-redux";
+import { browserHistory } from "react-router";
+import throttle from "lodash/throttle";
 
 // import the root reducer
-import rootReducer from './reducers/index';
-import { saveState, loadState } from './localstorage';
+import rootReducer from "./reducers/index";
+import { saveState, loadState } from "./localstorage";
 
-import tasks from './data/tasks';
-import gridColumns from './data/columns';
-import comments from './data/comments';
+import tasks from "./data/tasks";
+import gridColumns from "./data/columns";
+import comments from "./data/comments";
 
 // Sample Data, use if lazy as default store value, pass instead of persistedState
 const defaultState = {
@@ -20,7 +20,7 @@ const defaultState = {
 
 const persistedState = loadState();
 
-const store = createStore(rootReducer, defaultState);
+const store = createStore(rootReducer, persistedState);
 
 store.subscribe(
   throttle(() => {
@@ -31,8 +31,8 @@ store.subscribe(
 export const history = syncHistoryWithStore(browserHistory, store);
 
 if (module.hot) {
-  module.hot.accept('./reducers/', () => {
-    const nextRootReducer = require('./reducers/index').default;
+  module.hot.accept("./reducers/", () => {
+    const nextRootReducer = require("./reducers/index").default;
     store.replaceReducer(nextRootReducer);
   });
 }
