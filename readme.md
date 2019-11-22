@@ -1,6 +1,6 @@
 # React + Redux
 
-A simple Banban-Board React + Redux implementation.
+A simple Kanban-Board React + Redux implementation.
 
 ## Running
 
